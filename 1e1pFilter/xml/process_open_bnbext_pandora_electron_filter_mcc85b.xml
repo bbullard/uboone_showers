@@ -1,0 +1,43 @@
+<project name="bnbext_filter_data">
+    <!--  Project size  -->
+    <numevents>380640</numevents>
+
+    <!--  Operating System  -->
+    <os>SL6</os>
+
+    <!--  Batch resources  -->
+    <resource>DEDICATED,OPPORTUNISTIC,OFFSITE</resource>
+
+
+    <!--  Larsoft information  -->
+    <larsoft>
+        <tag>v06_26_01_10</tag>
+        <qual>e10:prof</qual>
+        <local>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10.tar</local>
+    </larsoft>
+    
+    <!--  Project stages  -->
+    <stage name="filter">
+        <fcl>run_PandoraOnly_data.fcl</fcl>
+        <outdir>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10/filter/data_extbnb_pandora_electron_filter_mcc85b</outdir>
+        <logdir>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10/filter/data_extbnb_pandora_electron_filter_mcc85b</logdir>
+        <workdir>/pnfs/uboone/scratch/users/srsoleti/work/v06_26_01_10/filter/data_extbnb_pandora_electron_filter_mcc85b</workdir>
+        <inputdef>prod_reco_optfilter_extbnb_v11_mcc8b</inputdef>
+        
+<!-- <output> -->
+            <!-- bnb_nu_cosmic_pandora_electron_filter${PROCESS}_%tc_gen.root -->
+        <!-- </output> -->
+
+        <numjobs>283</numjobs>
+        <disk>10GB</disk>
+        <memory>4096</memory>
+        <maxfilesperjob>40</maxfilesperjob>
+        <datatier>filtered</datatier>
+        <!-- <defname>prodgenie_bnb_intrinsic_nue_uboone_mcc8_detsim</defname> -->
+        <jobsub>--expected-lifetime=24h -Q</jobsub>
+    </stage>
+    <!--  file type  -->
+    <!-- <filetype>mc</filetype> -->
+    <!--  run type  -->
+    <!-- <runtype>physics</runtype> -->
+</project>

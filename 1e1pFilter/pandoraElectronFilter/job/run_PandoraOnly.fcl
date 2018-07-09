@@ -1,0 +1,44 @@
+#include "decisiontreeid.fcl"
+#include "lee_selection_alg.fcl"
+#include "ubxsec_mc_common.fcl"
+#include "pandora_lee_ana_common.fcl"
+
+lee_pandora_analyzer:
+{
+    module_type:                "PandoraLEEAnalyzer"
+    ElectronSelectionAlg:       @local::lee_electron_alg
+    PrintDebug:                 false
+}
+
+physics: {
+
+  producers : {
+     # ParameterSets for zero or more producer modules
+     decisiontreeid: @local::DecisionTreeID
+     #@table::ubxsec_mc_reco
+     #@table::ubxsec_mc_flashmatch
+  }
+
+  analyzers: {
+     # ParameterSets for zero or more analyzer modules
+     robertoana:  @local::lee_pandora_analyzer
+     # @table::ubxsec_mc_ana
+  }
+  
+  filters : {
+     # ParameterSets for zero or more filter modules
+  }
+
+  reco: [ decisiontreeid ]
+
+  path0 : [ robertoana ]
+
+  trigger_paths: [ reco ]
+
+  end_paths: [ path0 ]
+
+}
+
+physics.analyzers.robertoana.isData: false
+source.inputCommands:        [ "keep *_*_*_*", "drop *_opfiltercommon__McRecoStage1" ]
+services.SpaceCharge.EnableSimSpatialSCE: true

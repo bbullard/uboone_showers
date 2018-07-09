@@ -1,0 +1,35 @@
+<project name="bnb_nue_cosmic_pandora_electron_filter">
+    <!--  Project size  -->
+    <numevents>1926600</numevents>
+
+    <!--  Operating System  -->
+    <os>SL6</os>
+
+    <!--  Batch resources  -->
+    <resource>DEDICATED,OPPORTUNISTIC,OFFSITE</resource>
+
+
+    <!--  Larsoft information  -->
+    <larsoft>
+        <tag>v06_26_01_10</tag>
+        <qual>e10:prof</qual>
+        <local>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10.tar</local>
+    </larsoft>
+
+    <!--  Project stages  -->
+    <stage name="filter">
+        <fcl>run_PandoraOnly.fcl</fcl>
+        <outdir>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10/filter/bnb_nue_cosmic_pandora_electron_filter_mcc86</outdir>
+        <logdir>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10/filter/bnb_nue_cosmic_pandora_electron_filter_mcc86</logdir>
+        <workdir>/pnfs/uboone/scratch/users/srsoleti/work/v06_26_01_10/filter/bnb_nue_cosmic_pandora_electron_filter_mcc86</workdir>
+        <inputdef>prodgenie_bnb_intrinsic_nue_cosmic_uboone_mcc8.6_reco2</inputdef>
+        <numjobs>308</numjobs>
+        <disk>16GB</disk>
+        <memory>4096</memory>
+        <maxfilesperjob>40</maxfilesperjob>
+        <datatier>reconstructed</datatier>
+        <jobsub>--expected-lifetime=24h -Q</jobsub>
+       <schema>root</schema>
+    </stage>
+
+</project>

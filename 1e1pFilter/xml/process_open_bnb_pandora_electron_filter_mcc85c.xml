@@ -1,0 +1,43 @@
+<project name="bnb_filter_data">
+    <!--  Project size  -->
+    <numevents>690000</numevents>
+
+    <!--  Operating System  -->
+    <os>SL6</os>
+
+    <!--  Batch resources  -->
+    <resource>DEDICATED,OPPORTUNISTIC,OFFSITE</resource>
+
+
+    <!--  Larsoft information  -->
+    <larsoft>
+        <tag>v06_26_01_10</tag>
+        <qual>e10:prof</qual>
+        <local>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10.tar</local>
+<fcldir>/uboone/app/users/srsoleti/v06_26_01_10/srcs/1e1pFilter/pandoraElectronFilter/job</fcldir>
+    </larsoft>
+    
+    <!--  Project stages  -->
+    <stage name="filter">
+        <fcl>run_PandoraOnly_data_bnb.fcl</fcl>
+        <outdir>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10/filter/data_bnb_pandora_electron_filter_mcc85c</outdir>
+        <logdir>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10/filter/data_bnb_pandora_electron_filter_mcc85c</logdir>
+        <workdir>/pnfs/uboone/scratch/users/srsoleti/work/v06_26_01_10/filter/data_bnb_pandora_electron_filter_mcc85c</workdir>
+        <inputdef>prod_reco_optfilter_bnb_v11_unblind_mcc8c</inputdef>
+        <!-- <output> -->
+            <!-- bnb_nu_cosmic_pandora_electron_filter${PROCESS}_%tc_gen.root -->
+        <!-- </output> -->
+
+        <numjobs>7</numjobs>
+        <disk>10GB</disk>
+        <memory>4096</memory>
+        <maxfilesperjob>5</maxfilesperjob>
+        <datatier>filtered</datatier>
+        <!-- <defname>prodgenie_bnb_intrinsic_nue_uboone_mcc8_detsim</defname> -->
+        <jobsub>--expected-lifetime=24h -Q</jobsub>
+    </stage>
+    <!--  file type  -->
+    <!-- <filetype>mc</filetype> -->
+    <!--  run type  -->
+    <!-- <runtype>physics</runtype> -->
+</project>

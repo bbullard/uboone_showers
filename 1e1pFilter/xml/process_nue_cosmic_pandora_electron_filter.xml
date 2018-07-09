@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE project [
+<!ENTITY name "bnb_nue_cosmic_pandora_electron_filter">
+<!ENTITY larsoft_version "v06_26_01_10">
+<!ENTITY qualifier "e10:prof">
+<!ENTITY tar "shower_analyzer">
+<!ENTITY dataset "prodgenie_bnb_intrinsic_nue_cosmic_uboone_mcc8.7_reco2">
+<!ENTITY user "bbullard">
+]>
+<project name="&name;">
+    <!-- Doesn't matter for non-generating jobs -->
+    <numevents>1000000</numevents>
+
+    <!--  Operating System  -->
+    <os>SL6</os>
+
+    <!--  Batch resources  -->
+    <resource>DEDICATED,OPPORTUNISTIC,OFFSITE</resource>
+
+
+    <!--  Larsoft information  -->
+    <larsoft>
+        <tag>&larsoft_version;</tag>
+        <qual>&qualifier;</qual>
+        <local>/uboone/app/users/&user;/Binaries/tar/&tar;.tar</local>
+    </larsoft>
+
+    <!--  Project stages  -->
+    <stage name="selection">
+        <fcl>/uboone/app/users/&user;/Binaries/MyLarsoft/srcs/1e1pFilter/pandoraElectronFilter/job/run_PandoraOnly.fcl</fcl>
+        <outdir>/pnfs/uboone/scratch/users/&user;/grid_jobs/&name;</outdir>
+        <logdir>/pnfs/uboone/scratch/users/&user;/grid_jobs/&name;</logdir>
+        <workdir>/pnfs/uboone/scratch/users/&user;/work/&name;/</workdir>
+        <inputdef>&dataset;</inputdef>
+        <numjobs>400</numjobs>
+        <disk>70GB</disk>
+        <memory>4096</memory>
+        <maxfilesperjob>10</maxfilesperjob>
+        <datatier>filtered</datatier>
+        <jobsub>--expected-lifetime=24h -Q --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)'</jobsub>
+        <jobsub_start>--append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)'</jobsub_start>
+    </stage>
+    <!--  file type  -->
+    <!-- <filetype>mc</filetype> -->
+    <!--  run type  -->
+    <!-- <runtype>physics</runtype> -->
+</project>

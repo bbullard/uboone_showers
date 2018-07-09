@@ -1,0 +1,63 @@
+#include "decisiontreeidana.fcl"
+#include "decisiontreeid.fcl"
+
+#include "neutrinomcflash.fcl"
+#include "T0RecoAnodeCathodePiercing.fcl"
+#include "ubflashfinder.fcl"
+#include "neutrinoflashmatch.fcl"
+#include "cosmicflashmatch.fcl"
+
+#include "lee_selection_alg.fcl"
+#include "pandora_lee_ana_common.fcl"
+
+lee_pandora_analyzer:
+{
+    module_type:                "PandoraLEEAnalyzer"
+    ElectronSelectionAlg:       @local::lee_electron_alg
+    PrintDebug:                 false
+    isData:                     true
+}
+
+lee_electron_alg.startbeamtime: 3.65
+lee_electron_alg.endbeamtime: 5.25
+
+
+
+physics: {
+
+  producers : {
+     # ParameterSets for zero or more producer modules
+     NeutrinoFlashMatchData    : @local::NeutrinoFlashMatch
+     T0TrackTaggerCosmicpandoraNuData : @local::T0RecoAnodeCathodePiercing_data_loose
+     T0TrackTaggerBeampandoraNuData   : @local::T0RecoAnodeCathodePiercing_data
+     decisiontreeid: @local::DecisionTreeID
+  }
+  analyzers: {
+     # ParameterSets for zero or more analyzer modules
+     robertoana:  @local::lee_pandora_analyzer
+     #UBXSec: @local::UBXSec
+     decisiontreeidana: @local::DecisionTreeIDAna
+  }
+
+  filters : {
+     # ParameterSets for zero or more filter modules
+  }
+  reco: [ NeutrinoFlashMatchData,
+         T0TrackTaggerCosmicpandoraNuData,
+         T0TrackTaggerBeampandoraNuData, decisiontreeid ]
+
+  path0 : [  robertoana, UBXSec, decisiontreeidana ]
+
+  #path1 : [  comma separated list of module labels of analyzer or output modules  ]
+  #path2 : [  comma separated list of module labels of analyzer or output modules  ]
+  #path3 : [  comma separated list of module labels of analyzer or output modules  ]
+
+  #here, just a shorthand: could have done ana: [ robertoana ] then end_paths: [ ana ]
+  trigger_paths: [ reco  ]
+  end_paths: [ path0 ]
+
+}
+
+physics.analyzers.UBXSec.UseGENIEInfo:                          false
+physics.analyzers.UBXSec.ACPTProducer:                          "T0TrackTaggerCosmicpandoraNuData"
+physics.analyzers.UBXSec.NeutrinoFlashMatchProducer:            "NeutrinoFlashMatchData"

@@ -1,0 +1,43 @@
+<project name="cosmic_intime_pandora_electron_filter">
+    <!--  Project size  -->
+    <numevents>960000</numevents>
+
+    <!--  Operating System  -->
+    <os>SL6</os>
+
+    <!--  Batch resources  -->
+    <resource>DEDICATED,OPPORTUNISTIC,OFFSITE</resource>
+
+
+    <!--  Larsoft information  -->
+    <larsoft>
+        <tag>v06_26_01_10</tag>
+	<fcldir>/uboone/app/users/srsoleti/v06_26_01_10/srcs/1e1pFilter/pandoraElectronFilter/job</fcldir>
+	<qual>e10:prof</qual>
+        <local>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10.tar</local>
+    </larsoft>
+
+    <!--  Project stages  -->
+    <stage name="filter">
+        <fcl>run_PandoraOnly_intime.fcl</fcl>
+        <outdir>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10/filter/cosmic_intime_pandora_electron_filter</outdir>
+        <logdir>/pnfs/uboone/scratch/users/srsoleti/v06_26_01_10/filter/cosmic_intime_pandora_electron_filter</logdir>
+        <workdir>/pnfs/uboone/scratch/users/srsoleti/work/v06_26_01_10/filter/cosmic_intime_pandora_electron_filter</workdir>
+        <inputdef>prodcosmics_corsika_cmc_uboone_intime_mcc8.6_reco2</inputdef>
+        <!-- <output> -->
+            <!-- bnb_nu_cosmic_pandora_electron_filter${PROCESS}_%tc_gen.root -->
+        <!-- </output> -->
+        <numjobs>349</numjobs>
+        <disk>10GB</disk>
+        <memory>4096</memory>
+        <maxfilesperjob>40</maxfilesperjob>
+        <datatier>filtered</datatier>
+        <!-- <defname>prodgenie_bnb_intrinsic_nue_uboone_mcc8_detsim</defname> -->
+        
+        <jobsub>--expected-lifetime=24h -Q</jobsub>
+    </stage>
+    <!--  file type  -->
+    <!-- <filetype>mc</filetype> -->
+    <!--  run type  -->
+    <!-- <runtype>physics</runtype> -->
+</project>
